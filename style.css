@@ -50,15 +50,4 @@ body {
     background-color: goldenrod;
 }
 
-input:valid {
-    border: none;
-    box-shadow: none;
-}
 
-input:invalid {
-    box-shadow: 0 0 3px 4px #f13d25;
-}
-
-.error {
-    font-size: 0.9em;
-}
