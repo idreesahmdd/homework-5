@@ -50,4 +50,9 @@ body {
     background-color: goldenrod;
 }
 
-
+#nama-error,
+#usia-error,
+#uang-error {
+    display: inline-block;
+    font-size: 0.9em;
+}
