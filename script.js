@@ -6,7 +6,7 @@ class DataInput {
     }
 }
 
-const dataList = [new DataInput("Suep Juneng", 32, 320000), new DataInput("Jajang Miharga", 28, 190000)];
+const dataList = [];
 
 const submit = document.getElementById("submit");
 
@@ -58,30 +58,30 @@ function dataTable(tableData) {
         row.insertCell(3).innerHTML = dataList[i].uang;
     }
 }
-dataTable(tableData);
 
-function hitungTotalUangSangu() {
+function avgUangSangu() {
     let total = 0;
+    let avg = 0;
     for (i = 0; i < dataList.length; i++) {
-        total += dataList[i].uang;
+        total += Number(dataList[i].uang);
+        avg = total / dataList.length;
     }
-    return total;
+    return avg;
 }
-totalUangSangu = hitungTotalUangSangu();
-avgUangSangu = totalUangSangu / dataList.length;
+// console.log("rata-rata uang " + avgUangSangu());
 
-//
-function hitungTotalUsia() {
+function avgUsia() {
     let total = 0;
+    let avg = 0;
     for (i = 0; i < dataList.length; i++) {
-        total += dataList[i].usia;
+        total += Number(dataList[i].usia);
+        avg = total / dataList.length;
     }
-    return total;
+    return avg;
 }
-totalUsiaSemua = hitungTotalUsia();
-avgUsia = totalUsiaSemua / dataList.length;
+// console.log("rata-rata usia " + avgUsia());
 
-resume.innerHTML = "Rata-rata uang sangu Rp" + Math.round(avgUangSangu) + " dan Rata-rata usia " + Math.round(avgUsia);
+resume.innerHTML = "Rata-rata Uang Sangu Rp" + avgUangSangu() + " dan Rata-rata Usia " + avgUsia() + " tahun";
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -104,27 +104,28 @@ submit.addEventListener("click", (e) => {
         errorNama.innerHTML = "";
         errorUsia.innerHTML = "";
         errorUangSangu.innerHTML = "";
-
         benar.innerHTML = "Data Berhasil di Inputkan";
-        //
+
+        resume.innerHTML = "Rata-rata Uang Sangu Rp" + Math.round(avgUangSangu()) + " dan Rata-rata Usia " + Math.round(avgUsia()) + " tahun";
     } else {
         // ------------- INPUT VALIDASI --------------- //
-        if (inputSubmitNama == true) {
-            errorNama.innerHTML = "";
-        } else {
+        if (inputSubmitNama == false) {
             errorNama.innerHTML = "*Masukkan Nama minimal 10 Karakter";
+        } else {
+            errorNama.innerHTML = "";
         }
 
-        if (inputSubmitUsia == true) {
+        if (inputSubmitUsia == false) {
+            errorUsia.innerHTML = "*Usia minimal 25 tahun";
+        } else {
             errorUsia.innerHTML = "";
-        } else {
-            errorUsia.innerHTML = "*Usia kamu tidak memenuhi syarat";
         }
 
-        if (inputSubmitUang == true) {
-            errorUangSangu.innerHTML = "";
+        if (inputSubmitUang == false) {
+            errorUangSangu.innerHTML = "*Uang Sangu Rp100.000 - Rp1.000.000";
         } else {
-            errorUangSangu.innerHTML = "*Uang Sangu tidak sesuai kriteria";
+            errorUangSangu.innerHTML = "";
         }
+        benar.innerHTML = " ";
     }
 });
